@@ -1,0 +1,6 @@
+Django==2.2.1
+django-rest-auth==0.9.5
+djangorestframework==3.9.3
+pytz==2019.1
+six==1.12.0
+sqlparse==0.3.0
