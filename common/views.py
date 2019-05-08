@@ -1,17 +1,11 @@
-from django.shortcuts import get_object_or_404
-
 from rest_framework import generics
 from rest_framework import exceptions
-from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.response import Response
-from rest_framework import status
 
 from .models import Appointment
 from.serializers import AppointmentSerializer, AppointmentCreateSerializer
 from .permissions import AppointmentPermission, IsOwnerOrReadOnly
 
-from accounts.models import Doctor
 
 class MethodSerializerView(object):
     '''

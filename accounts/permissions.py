@@ -28,6 +28,6 @@ class DoctorPermission(BasePermission):
         except Doctor.DoesNotExist:
             doctor = None
 
-        if doctor or request.user.is_superuser:
+        if (doctor or request.user.is_superuser) or request.method == "GET":
             return True
         return False
