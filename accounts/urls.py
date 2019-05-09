@@ -3,6 +3,7 @@ from django.urls import path, re_path, include
 from . import views
 
 urlpatterns = [
+    path('contact/', views.Contact.as_view()),
     path('auth/', include('rest_auth.urls')),
     path('doctors/', views.DoctorList.as_view()),
     path('doctors/<int:pk>/', views.DoctorDetail.as_view()),

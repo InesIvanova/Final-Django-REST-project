@@ -23,6 +23,15 @@ class Patient(models.Model):
         return f"{self.user}"
 
 
+class Contact(models.Model):
+    customer = models.EmailField()
+    content = models.TextField()
+
+    def __str__(self):
+        return f"{self.customer}: {self.content[:20]}"
+
+
+
 
 
 

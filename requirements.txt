@@ -1,6 +1,14 @@
+amqp==1.4.9
+anyjson==0.3.3
+billiard==3.3.0.23
+celery==3.1.26.post2
 Django==2.2.1
+django-celery==3.2.2
 django-rest-auth==0.9.5
 djangorestframework==3.9.3
+kombu==3.0.37
 pytz==2019.1
+redis==2.10.3
 six==1.12.0
 sqlparse==0.3.0
+vine==1.3.0

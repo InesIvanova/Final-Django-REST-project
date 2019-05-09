@@ -1,9 +1,12 @@
-from rest_framework import views, generics
+from rest_framework import views, generics, response, status
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Doctor
-from .serializers import DoctorSerializer
+from .models import Doctor, Contact
+from .serializers import DoctorSerializer, ContactSerializer
 from .permissions import DoctorPermission, IsOwnerOrReadOnly
+from .tasks import email_to_customer, email_to_admin
+
+
 
 
 class DoctorList(generics.ListCreateAPIView):
@@ -27,6 +30,27 @@ class DoctorDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = DoctorSerializer
 
     permission_classes = [IsAuthenticated, DoctorPermission, IsOwnerOrReadOnly]
+
+
+class Contact(generics.CreateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = ContactSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        email_to_customer.delay(self.request.user.username, request.data['customer'])
+        email_to_admin.delay(request.data['customer'], request.data['content'])
+        return response.Response(serializer.data,
+                                 status=status.HTTP_201_CREATED, headers=headers)
+
+    permission_classes = [IsAuthenticated,]
+
+
+
+
 
 
 
