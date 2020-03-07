@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'common',
     'accounts',
-    'djcelery',
+    # 'djcelery',
     'corsheaders',
 
 ]
@@ -60,6 +60,15 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+   'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAdminUser'
+   ),
+}
+
 
 ROOT_URLCONF = 'appointment_system.urls'
 
