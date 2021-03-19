@@ -5,7 +5,7 @@ celery==3.1.26.post2
 Django==2.2.1
 django-celery==3.2.2
 django-rest-auth==0.9.5
-djangorestframework==3.9.3
+djangorestframework==3.11.2
 kombu==3.0.37
 pytz==2019.1
 redis==2.10.3
